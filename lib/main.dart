@@ -1,10 +1,17 @@
 // ignore_for_file: use_key_in_widget_constructors
 
+import 'dart:io';
+
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const MyApp());
 }
 
@@ -64,16 +71,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> initializeCamera() async {
     cameras = await availableCameras();
-    _controller = CameraController(cameras[0], ResolutionPreset.low, enableAudio: false);
-    await _controller.initialize();
+    _controller =
+        CameraController(cameras[0], ResolutionPreset.low, enableAudio: false);
+    await _controller.initialize().onError((error, stackTrace) {});
   }
 
   Future<void> toggleFlashlight(FlashLight flashLight) async {
     if (_controller.value.isInitialized) {
-      if (_controller.value.flashMode == FlashMode.off &&
-          flashLight == FlashLight.onn) {
+      if (flashLight == FlashLight.onn) {
         await _controller.setFlashMode(FlashMode.torch);
-      } else if(_controller.value.flashMode == FlashMode.torch && flashLight == FlashLight.off){
+      } else if (flashLight == FlashLight.off) {
         await _controller.setFlashMode(FlashMode.off);
       }
     }
@@ -139,7 +146,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(20),
                     value: dropdownValue,
                     // dropdownColor: ,
-                    items: <String>['hi', 'bye', 'sye']
+                    items: <String>[
+                      'Hi',
+                      'Hello',
+                      'How are you?',
+                      'I am fine',
+                      'Ok',
+                      'Good Morning',
+                      'Good Afternoon',
+                      'Good Evening',
+                      'Thank you',
+                      'Sorry'
+                    ]
                         .map<DropdownMenuItem<String>>(
                             (String value) => DropdownMenuItem(
                                   value: value,
@@ -166,7 +184,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     : darkDynamic?.primary ?? Colors.deepPurple,
 
                 onPressed: () {
-                  toggleFlashlight(FlashLight.onn);
+                  if (dropdownValue != null) {
+                    selectedOption(dropdownValue!);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Please select your message!'),
+                    ));
+                  }
                 },
                 child: Text(
                   'Send',
@@ -202,6 +226,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool isDarkTheme(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark ? true : false;
+  }
+
+  void selectedOption(String selection) {
+    if (selection == 'Hi') {
+      hi();
+    } else if (selection == 'Hello') {
+      hello();
+    }
+  }
+
+  void hi() {
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 300));
+    toggleFlashlight(FlashLight.off);
+  }
+
+  void hello() {
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 600));
+    toggleFlashlight(FlashLight.off);
   }
 }
 
