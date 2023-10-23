@@ -59,12 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) => Scaffold(
-        // backgroundColor: Theme.of(context).brightness == Brightness.dark
-        //     ? darkDynamic?.onBackground
-        //             .withOpacity(0.01)
-        //             .harmonizeWith(Colors.black) ??
-        //         Colors.grey[850]
-        //     : darkDynamic?.onBackground ?? Colors.white,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? darkDynamic?.onPrimary
+                    .withOpacity(0.1)
+                    .harmonizeWith(Colors.black) ??
+                Colors.grey[850]
+            : darkDynamic?.onPrimaryContainer ?? Colors.white,
         appBar: AppBar(
           // TRY THIS: Try changing the color here to a specific color (to
           // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
@@ -80,9 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
+                margin: const EdgeInsets.only(top: 40.0),
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width * 0.5),
@@ -91,12 +92,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: isDarkTheme(context)
                         ? darkDynamic?.onSurface.withOpacity(0.1) ??
                             Colors.grey.withOpacity(0.1)
-                        : darkDynamic?.onSurface ?? Colors.white),
+                        : darkDynamic?.onPrimary.withOpacity(0.1) ??
+                            Colors.white),
                 child: DropdownButton<String>(
+                    elevation: 20,
                     hint: const Text('Select your message'),
                     icon: const Icon(Icons.arrow_drop_down),
                     isExpanded: true,
                     enableFeedback: true,
+                    dropdownColor:
+                        Theme.of(context).brightness == Brightness.dark
+                            ? darkDynamic?.primaryContainer
+                                    .harmonizeWith(Colors.black) ??
+                                Colors.grey[850]
+                            : darkDynamic?.primary ?? Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     value: dropdownValue,
                     // dropdownColor: ,
@@ -114,27 +123,44 @@ class _MyHomePageState extends State<MyHomePage> {
                       });
                     }),
               ),
-              TextButton(
-                style: ButtonStyle(
-                    elevation: const MaterialStatePropertyAll(15),
-                    shape: MaterialStatePropertyAll(BeveledRectangleBorder(
-                        borderRadius: BorderRadius.circular(15))),
-                    backgroundColor: MaterialStateColor.resolveWith((states) {
-                      if (states.contains(MaterialState.pressed)) {
-                        return darkDynamic?.onPrimaryContainer
-                                .withOpacity(0.2) ??
-                            Colors.deepPurple;
-                      }
-                      return darkDynamic?.onPrimaryContainer.withOpacity(0.3) ??
-                          Colors.deepPurple;
-                    })),
+              const SizedBox(height: 10),
+              MaterialButton(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
+                // shadowColor: MaterialStatePropertyAll(
+                //     darkDynamic?.onPrimary.withOpacity(0.6) ??
+                //         Colors.deepPurple),
+                color: isDarkTheme(context)
+                    ? lightDynamic?.primary ?? Colors.deepPurple
+                    : darkDynamic?.primary ?? Colors.deepPurple,
+
                 onPressed: () {},
                 child: Text(
                   'Send',
                   style: TextStyle(
-                      color: darkDynamic?.onPrimary ?? Colors.white54),
+                      color: isDarkTheme(context)
+                          ? lightDynamic?.onPrimary ?? Colors.white54
+                          : darkDynamic?.onPrimary ?? Colors.black54),
                 ),
               ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.25),
+              Image.asset(
+                'images/IMG-20231022-WA0008.png',
+                width: MediaQuery.of(context).size.width * 0.9,
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Made with <3 by Team Ayush',
+                    style: TextStyle(
+                        color: isDarkTheme(context)
+                            ? lightDynamic?.onPrimary ?? Colors.white54
+                            : darkDynamic?.onPrimary ?? Colors.black54),
+                  ),
+                ),
+              )
             ],
           ),
         ),
