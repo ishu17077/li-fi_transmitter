@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Li-Fi Transmitter',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -44,8 +45,8 @@ class MyApp extends StatelessWidget {
       ),
       darkTheme: ThemeData.dark().copyWith(
           primaryTextTheme:
-              TextTheme(bodyLarge: TextStyle(color: Colors.white70))),
-      home: MyHomePage(title: 'Li-Fi Data Transmitter'),
+             const TextTheme(bodyLarge: TextStyle(color: Colors.white70))),
+      home: const MyHomePage(title: 'Li-Fi Data Transmitter'),
     );
   }
 }
