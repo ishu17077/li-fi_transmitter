@@ -53,7 +53,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late List<CameraDescription> cameras;
+  late CameraController _controller;
   String? dropdownValue;
+  @override
+  void initState() {
+    initializeCamera();
+    super.initState();
+  }
+
+  Future<void> initializeCamera() async {
+    cameras = await availableCameras();
+    _controller = CameraController(cameras[0], ResolutionPreset.low, enableAudio: false);
+    await _controller.initialize();
+  }
+
+  Future<void> toggleFlashlight(FlashLight flashLight) async {
+    if (_controller.value.isInitialized) {
+      if (_controller.value.flashMode == FlashMode.off &&
+          flashLight == FlashLight.onn) {
+        await _controller.setFlashMode(FlashMode.torch);
+      } else if(_controller.value.flashMode == FlashMode.torch && flashLight == FlashLight.off){
+        await _controller.setFlashMode(FlashMode.off);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +165,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     ? lightDynamic?.primary ?? Colors.deepPurple
                     : darkDynamic?.primary ?? Colors.deepPurple,
 
-                onPressed: () {},
+                onPressed: () {
+                  toggleFlashlight(FlashLight.onn);
+                },
                 child: Text(
                   'Send',
                   style: TextStyle(
@@ -172,3 +204,5 @@ class _MyHomePageState extends State<MyHomePage> {
     return Theme.of(context).brightness == Brightness.dark ? true : false;
   }
 }
+
+enum FlashLight { onn, off }
