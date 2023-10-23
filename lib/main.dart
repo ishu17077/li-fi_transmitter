@@ -1,7 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'dart:io';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -233,19 +233,206 @@ class _MyHomePageState extends State<MyHomePage> {
       hi();
     } else if (selection == 'Hello') {
       hello();
+    } else if (selection == 'How are you?') {
+      howAreYou();
+    } else if (selection == 'I am fine') {
+      iAmFine();
+    } else if (selection == 'Ok') {
+      ok();
+    } else if (selection == 'Good Morning') {
+      goodMorning();
+    } else if (selection == 'Good Afternoon') {
+      goodAfternoon();
+    } else if (selection == 'Good Evening') {
+      goodEvening();
+    } else if (selection == 'Thank you') {
+      thankYou();
+    } else if (selection == 'Sorry') {
+      sorry();
     }
   }
 
   void hi() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
     toggleFlashlight(FlashLight.onn);
     sleep(const Duration(milliseconds: 300));
     toggleFlashlight(FlashLight.off);
+
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
   }
 
   void hello() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
     toggleFlashlight(FlashLight.onn);
     sleep(const Duration(milliseconds: 600));
     toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void howAreYou() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 800));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void iAmFine() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 1000));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void ok() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 1100));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void goodMorning() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void goodAfternoon() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 800));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void goodEvening() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void thankYou() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 800));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 800));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
+  }
+
+  void sorry() {
+    Fluttertoast.showToast(
+      msg: "Sending Data",
+      toastLength: Toast.LENGTH_SHORT,
+    );
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 200));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 200));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 200));
+    toggleFlashlight(FlashLight.off);
+    sleep(const Duration(milliseconds: 400));
+    toggleFlashlight(FlashLight.onn);
+    sleep(const Duration(milliseconds: 200));
+    toggleFlashlight(FlashLight.off);
+    Fluttertoast.showToast(
+      msg: "Data Sent",
+      toastLength: Toast.LENGTH_SHORT,
+      timeInSecForIosWeb: 600,
+    );
   }
 }
 
