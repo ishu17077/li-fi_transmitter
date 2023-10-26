@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:lifi_transmitter/Homepage/ui_component_functions.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-Future<void> permissionCheck(BuildContext context) async {
+Future<PermissionStatus> permissionCheck(BuildContext context) async {
   PermissionStatus status = await Permission.camera.status;
   if (status.isDenied) {
     // ignore: use_build_context_synchronously
@@ -15,7 +15,9 @@ Future<void> permissionCheck(BuildContext context) async {
         TextButton(
             onPressed: () async {
               PermissionStatus stillStatus = await Permission.camera.request();
-              if (stillStatus.isDenied) {
+              if (stillStatus.isDenied ||
+                  stillStatus.isPermanentlyDenied ||
+                  stillStatus.isRestricted) {
                 SystemNavigator.pop();
               }
             },
@@ -46,4 +48,5 @@ Future<void> permissionCheck(BuildContext context) async {
     );
     // The OS restricts access, for example because of parental controls.
   }
+  return await Permission.camera.status;
 }

@@ -126,15 +126,25 @@ class _MyHomePageState extends State<MyHomePage> {
                       : darkDynamic?.primary ?? Colors.deepPurple,
 
                   onPressed: () async {
-                    if (dropdownValue != null) {
-                      permissionCheck(context);
-                      if (await Permission.camera.status.isGranted) {
+                    PermissionStatus status = await permissionCheck(context);
+                    if (status.isGranted) {
+                      if (dropdownValue != null) {
                         selectedOption(dropdownValue!);
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text('Please select your message!'),
+                        ));
                       }
                     } else {
+                      // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Please select your message!'),
+                        content: Text(
+                            'Please allow Camera Permission to use the app!'),
                       ));
+                      // ignore: use_build_context_synchronously
+                      await permissionCheck(context);
                     }
                   },
                   child: Text(

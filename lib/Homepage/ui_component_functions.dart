@@ -9,6 +9,7 @@ void flutterShowToast(String message,
     {Toast toastLength = Toast.LENGTH_SHORT}) {
   Fluttertoast.showToast(
     msg: message,
+    gravity: ToastGravity.CENTER,
     toastLength: toastLength,
   );
 }
